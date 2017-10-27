@@ -9,7 +9,7 @@ import { merge as configure } from './configuration';
 
 module.exports = {
   render,
-  shallow,
+  shallow: mount,
   mount,
   ShallowWrapper,
   ReactWrapper,

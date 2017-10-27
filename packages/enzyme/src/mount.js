@@ -7,5 +7,17 @@ import ReactWrapper from './ReactWrapper';
  * @returns {ReactWrapper}
  */
 export default function mount(node, options) {
-  return new ReactWrapper(node, null, options);
+    const wrapper = new ReactWrapper(node, null, options);
+    wrapper.hasClass = (cls) => {
+        return wrapper.render().hasClass(cls);
+    }
+    const find = wrapper.find.bind(wrapper);
+    wrapper.find = (selector) => {
+        return find(selector).hostNodes();
+    }
+    const childAt = wrapper.childAt.bind(wrapper);
+    wrapper.childAt = (index) => {
+        return this.children().children().at(index);
+    }
+    return wrapper;
 }

@@ -100,6 +100,10 @@ class ReactWrapper {
         privateSet(this, NODES, nodes);
       }
       this.length = this[NODES].length;
+      if(this.length === 1) {
+          this.node = this.instance();
+      }
+      this.nodes = this[NODES];
     }
     privateSet(this, OPTIONS, root ? root[OPTIONS] : options);
   }
@@ -917,7 +921,8 @@ class ReactWrapper {
    * @returns {ReactElement}
    */
   get(index) {
-    return this.getElements()[index];
+    // return this.getElements()[index];
+    return this.nodes[index].instance;
   }
 
   /**
@@ -1093,8 +1098,6 @@ function privateWarning(prop, extraMessage) {
   });
 }
 
-privateWarning('node', 'Consider using the getElement() method instead.');
-privateWarning('nodes', 'Consider using the getElements() method instead.');
 privateWarning('renderer', '');
 privateWarning('options', '');
 privateWarning('complexSelector', '');
